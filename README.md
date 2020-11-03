@@ -1,1 +1,2 @@
-# -job4j_forum
+# Simple forum
+Realisation of simple forum via Spring Boot
