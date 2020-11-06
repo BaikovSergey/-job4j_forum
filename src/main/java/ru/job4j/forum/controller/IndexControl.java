@@ -8,15 +8,17 @@ import ru.job4j.forum.service.PostService;
 @Controller
 public class IndexControl {
 
-    private final PostService posts;
+    private final PostService service;
 
     public IndexControl(PostService posts) {
-        this.posts = posts;
+        this.service = posts;
     }
 
     @GetMapping({"/", "/index"})
     public String index(Model model) {
-        model.addAttribute("posts", posts.getAll());
+        model.addAttribute("posts", service.findAll());
+        //model.addAttribute("user",
+         //       SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "index";
     }
 }

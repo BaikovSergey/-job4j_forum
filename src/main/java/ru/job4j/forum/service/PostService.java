@@ -2,20 +2,35 @@ package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Post;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.job4j.forum.repository.MemStore;
+import java.util.Collection;
 
 @Service
 public class PostService {
 
-    private final List<Post> posts = new ArrayList<>();
+    private MemStore memStore;
 
-    public PostService() {
-        posts.add(Post.of("Продаю машину ладу 01."));
+    public PostService(MemStore memStore) {
+        this.memStore = memStore;
     }
 
-    public List<Post> getAll() {
-        return posts;
+    public Post create (Post post) {
+        return this.memStore.create(post);
+    }
+
+    public void update (Post post) {
+        this.memStore.update(post);
+    }
+
+    public void delete (int id) {
+        this.memStore.delete(id);
+    }
+
+    public Post findById (int id) {
+        return this.memStore.findById(id);
+    }
+
+    public Collection<Post> findAll() {
+        return this.memStore.findAll();
     }
 }
