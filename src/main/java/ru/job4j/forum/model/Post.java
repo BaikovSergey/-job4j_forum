@@ -8,7 +8,16 @@ public class Post {
     private int id;
     private String name;
     private String desc;
-    private Calendar created;
+    private String created;
+
+    public Post() {
+
+    }
+
+    public Post(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
 
     public static Post of(String name) {
         Post post = new Post();
@@ -40,11 +49,11 @@ public class Post {
         this.desc = desc;
     }
 
-    public Calendar getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Calendar created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

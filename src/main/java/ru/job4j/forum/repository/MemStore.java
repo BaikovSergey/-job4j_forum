@@ -3,7 +3,10 @@ package ru.job4j.forum.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.forum.model.Post;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class MemStore implements Store {
 
     @Override
     public Post create(Post post) {
+        post.setCreated(getCurrentDate());
         this.posts.add(post);
         post.setId(this.posts.indexOf(post));
         return post;
@@ -26,6 +30,7 @@ public class MemStore implements Store {
     @Override
     public void update(Post post) {
         int index = post.getId();
+        this.posts.remove(index);
         this.posts.add(index, post);
     }
 
@@ -42,6 +47,12 @@ public class MemStore implements Store {
     @Override
     public Collection<Post> findAll() {
         return this.posts;
+    }
+
+    private String getCurrentDate() {
+        DateFormat pattern = new SimpleDateFormat("dd.MM.yyyy");
+        Calendar calendar = Calendar.getInstance();
+        return pattern.format(calendar.getTime());
     }
 
 }
